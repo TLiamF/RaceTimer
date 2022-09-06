@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>VYC Race Timer</title>
+    <link rel="stylesheet" href="style.css" />
+
+  </head>
+
+  <body>
+    <div class="stopwatch">
+      <h1>B FLEET</h1>
+      <div class="circle">
+        <span class="btime" id="display">00:00:00:00</span>
+      </div>
+
+      <div class="controls">
+        <button class="buttonPlay">
+          <img id="playButton" src="icons/play-button.png" />
+
+          <img id="pauseButton" src="icons/pause-button.png" />
+        </button>
+
+        <button class="buttonReset">
+          <img id="resetButton" src="icons/reset-button.png" />
+        </button>
+	<button class="reload" onclick="if (confirm('Start New Race?')){self.location.reload();}"><img id="reloadButton" src="icons/Restart.png" /></button>
+     	<button class="buttonWrite" onclick="download('B_FLEET', CSVResultsAsString(11, 22, 'B', raceStart));"><img id="writeButton" src="icons/write.png" /></button>
+	<select name="course" id="course" class="box">
+          <option value="Course 1">Course 1</option>
+          <option value="Course 2">Course 2</option>
+          <option value="Course 3">Course 3</option>
+          <option value="Course 4">Course 4</option>
+          <option value="Course 5">Course 5</option>
+          <option value="Course 6">Course 6</option>
+          <option value="Course 7">Course 7</option>
+          <option value="Course 8">Course 8</option>
+          <option value="Course 9">Course 9</option>
+	  <option value="Course 10">Course 10</option>
+          <option value="Course 11">Course 11</option>
+          <option value="Course 12">Course 12</option>
+          <option value="Course 13">Course 13</option>
+          <option value="Course 14">Course 14</option>
+        </select>
+     
+      </div>
+    </div>
+    <div class="results">
+     <table>
+	     
+	<tr>
+	  <td class="tdundo"><button class="button_undo" disabled id="b11_undo" onclick="undo_result('b11')";><img id="b11_undo_img" src="icons/disabled_undo.png"/></button></td>
+	  <td class="BFleettd"><span id="b11_boat_name">Blues 'n Seas</span></td>
+	  <td><button class=button id="b11_finish" onclick="FinishBoat('b11')";><img id="b11_finish_img" src="icons/racing.png"/></button></td>
+	  <td><button class=button id="b11_dnf" onclick="DNFBoat('b11')"><img id="b11_dnf_img" src="icons/dnf1.png"/></button></td>
+	  <td><span id="b11_time_display">00:00:00:00</span><span hidden id="b11_time_finish"></span></td>
+	</tr>
+
+	<tr>
+	  <td class="tdundo"><button class="button_undo" disabled id="b12_undo" onclick="undo_result('b12')";><img id="b12_undo_img" src="icons/disabled_undo.png"/></button></td>
+	  <td class="BFleettd"><span id="b12_boat_name">Cimarron</span></td>
+	  <td><button class=button id="b12_finish" onclick="FinishBoat('b12')";><img id="b12_finish_img" src="icons/racing.png"/></button></td>
+	  <td><button class=button id="b12_dnf" onclick="DNFBoat('b12')"><img id="b12_dnf_img" src="icons/dnf1.png"/></button></td>
+	  <td><span id="b12_time_display">00:00:00:00</span><span hidden id="b12_time_finish"></span></td>
+	</tr>
+
+	<tr>
+	  <td class="tdundo"><button class="button_undo" disabled id="b13_undo" onclick="undo_result('b13')";><img id="b13_undo_img" src="icons/disabled_undo.png"/></button></td>
+	  <td class="BFleettd"><span id="b13_boat_name">Cygnus</span></td>
+	  <td><button class=button id="b13_finish" onclick="FinishBoat('b13')";><img id="b13_finish_img" src="icons/racing.png"/></button></td>
+	  <td><button class=button id="b13_dnf" onclick="DNFBoat('b13')"><img id="b13_dnf_img" src="icons/dnf1.png"/></button></td>
+	  <td><span id="b13_time_display">00:00:00:00</span><span hidden id="b13_time_finish"></span></td>
+	</tr>
+
+	<tr>
+	  <td class="tdundo"><button class="button_undo" disabled id="b14_undo" onclick="undo_result('b14')";><img id="b14_undo_img" src="icons/disabled_undo.png"/></button></td>
+	  <td class="BFleettd"><span id="b14_boat_name">Dragonfly</span></td>
+	  <td><button class=button id="b14_finish" onclick="FinishBoat('b14')";><img id="b14_finish_img" src="icons/racing.png"/></button></td>
+	  <td><button class=button id="b14_dnf" onclick="DNFBoat('b14')"><img id="b14_dnf_img" src="icons/dnf1.png"/></button></td>
+	  <td><span id="b14_time_display">00:00:00:00</span><span hidden id="b14_time_finish"></span></td>
+	</tr>
+
+	<tr>
+	  <td class="tdundo"><button class="button_undo" disabled id="b15_undo" onclick="undo_result('b15')";><img id="b15_undo_img" src="icons/disabled_undo.png"/></button></td>
+	  <td class="BFleettd"><span id="b15_boat_name">Eagle Moon</span></td>
+	  <td><button class=button id="b15_finish" onclick="FinishBoat('b15')";><img id="b15_finish_img" src="icons/racing.png"/></button></td>
+	  <td><button class=button id="b15_dnf" onclick="DNFBoat('b15')"><img id="b15_dnf_img" src="icons/dnf1.png"/></button></td>
+	  <td><span id="b15_time_display">00:00:00:00</span><span hidden id="b15_time_finish"></span></td>
+	</tr>
+
+	<tr>
+	  <td class="tdundo"><button class="button_undo" disabled id="b16_undo" onclick="undo_result('b16')";><img id="b16_undo_img" src="icons/disabled_undo.png"/></button></td>
+	  <td class="BFleettd"><span id="b16_boat_name">Fyfe II</span></td>
+	  <td><button class=button id="b16_finish" onclick="FinishBoat('b16')";><img id="b16_finish_img" src="icons/racing.png"/></button></td>
+	  <td><button class=button id="b16_dnf" onclick="DNFBoat('b16')"><img id="b16_dnf_img" src="icons/dnf1.png"/></button></td>
+	  <td><span id="b16_time_display">00:00:00:00</span><span hidden id="b16_time_finish"></span></td>
+	</tr>
+
+	<tr>
+	  <td class="tdundo"><button class="button_undo" disabled id="b17_undo" onclick="undo_result('b17')";><img id="b17_undo_img" src="icons/disabled_undo.png"/></button></td>
+	  <td class="BFleettd"><span id="b17_boat_name">Jesse</span></td>
+	  <td><button class=button id="b17_finish" onclick="FinishBoat('b17')";><img id="b17_finish_img" src="icons/racing.png"/></button></td>
+	  <td><button class=button id="b17_dnf" onclick="DNFBoat('b17')"><img id="b17_dnf_img" src="icons/dnf1.png"/></button></td>
+	  <td><span id="b17_time_display">00:00:00:00</span><span hidden id="b17_time_finish"></span></td>
+	</tr>
+
+	<tr>
+	  <td class="tdundo"><button class="button_undo" disabled id="b18_undo" onclick="undo_result('b18')";><img id="b18_undo_img" src="icons/disabled_undo.png"/></button></td>
+	  <td class="BFleettd"><span id="b18_boat_name">Lucky Dog</span></td>
+	  <td><button class=button id="b18_finish" onclick="FinishBoat('b18')";><img id="b18_finish_img" src="icons/racing.png"/></button></td>
+	  <td><button class=button id="b18_dnf" onclick="DNFBoat('b18')"><img id="b18_dnf_img" src="icons/dnf1.png"/></button></td>
+	  <td><span id="b18_time_display">00:00:00:00</span><span hidden id="b18_time_finish"></span></td>
+	</tr>
+
+	<tr>
+	  <td class="tdundo"><button class="button_undo" disabled id="b19_undo" onclick="undo_result('b19')";><img id="b19_undo_img" src="icons/disabled_undo.png"/></button></td>
+	  <td class="BFleettd"><span id="b19_boat_name">Stormy</span></td>
+	  <td><button class=button id="b19_finish" onclick="FinishBoat('b19')";><img id="b19_finish_img" src="icons/racing.png"/></button></td>
+	  <td><button class=button id="b19_dnf" onclick="DNFBoat('b19')"><img id="b19_dnf_img" src="icons/dnf1.png"/></button></td>
+	  <td><span id="b19_time_display">00:00:00:00</span><span hidden id="b19_time_finish"></span></td>
+	</tr>
+
+	<tr>
+	  <td class="tdundo"><button class="button_undo" disabled id="b20_undo" onclick="undo_result('b20')";><img id="b20_undo_img" src="icons/disabled_undo.png"/></button></td>
+	  <td class="BFleettd"><span id="b20_boat_name">Tsonqua</span></td>
+	  <td><button class=button id="b20_finish" onclick="FinishBoat('b20')";><img id="b20_finish_img" src="icons/racing.png"/></button></td>
+	  <td><button class=button id="b20_dnf" onclick="DNFBoat('b20')"><img id="b20_dnf_img" src="icons/dnf1.png"/></button></td>
+	  <td><span id="b20_time_display">00:00:00:00</span><span hidden id="b20_time_finish"></span></td>
+	</tr>
+
+	<tr>
+	  <td class="tdundo"><button class="button_undo" disabled id="b21_undo" onclick="undo_result('b21')";><img id="b21_undo_img" src="icons/disabled_undo.png"/></button></td>
+	  <td class="BFleettd"><span id="b21_boat_name">Scotch Mist</span></td>
+	  <td><button class=button id="b21_finish" onclick="FinishBoat('b21')";><img id="b21_finish_img" src="icons/racing.png"/></button></td>
+	  <td><button class=button id="b21_dnf" onclick="DNFBoat('b21')"><img id="b21_dnf_img" src="icons/dnf1.png"/></button></td>
+	  <td><span id="b21_time_display">00:00:00:00</span><span hidden id="b21_time_finish"></span></td>
+	</tr>
+
+	<tr>
+	  <td class="tdundo"><button class="button_undo" disabled id="b22_undo" onclick="undo_result('b22')";><img id="b22_undo_img" src="icons/disabled_undo.png"/></button></td>
+	  <td class="BFleettd"><span id="b22_boat_name">Valuta</span></td>
+	  <td><button class=button id="b22_finish" onclick="FinishBoat('b22')";><img id="b22_finish_img" src="icons/racing.png"/></button></td>
+	  <td><button class=button id="b22_dnf" onclick="DNFBoat('b22')"><img id="b22_dnf_img" src="icons/dnf1.png"/></button></td>
+	  <td><span id="b22_time_display">00:00:00:00</span><span hidden id="b22_time_finish"></span></td>
+	</tr>
+
+	  </table>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
