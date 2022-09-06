@@ -1,0 +1,214 @@
+<html>
+<head>
+<script>
+
+
+function startTimer(duration, display) {
+    var start = Date.now(),
+        diff,
+        minutes,
+        seconds;
+    function timer() {
+        // get the number of seconds that have elapsed since 
+        // startTimer() was called
+        diff = duration - (((Date.now() - start) / 1000) | 0);
+
+        // does the same job as parseInt truncates the float
+        minutes = (diff / 60) | 0;
+        seconds = (diff % 60) | 0;
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+	if (display.textContent == "06:00") {
+		action1.textContent = "SOUND HORN 5 TIMES.";
+	}
+	else if (display.textContent == "05:50") {
+		action1.textContent = "";
+		
+	}
+
+	else if (display.textContent == "05:15") {
+		action2.textContent = "PREPARE TO RAISE FLEET FLAG.";
+		
+	}
+	else if (display.textContent == "05:00") {
+		action1.textContent = "SOUND HORN ONCE.";
+		action2.textContent = "RAISE THE FLEET FLAG.";
+	}
+	else if (display.textContent == "04:50") {
+		action1.textContent = "";
+		action2.textContent = "";
+		
+	}
+	else if (display.textContent == "04:15") {
+		action2.textContent = "PREPARE TO RAISE PREP FLAG.";
+	}
+	else if (display.textContent == "04:00") {
+		action1.textContent = "SOUND HORN ONCE.";
+		action2.textContent = "RAISE PREP FLAG.";
+	}
+	else if (display.textContent == "03:45") {
+		action1.textContent = "";
+		action2.textContent = "";
+	}
+	else if (display.textContent == "01:15") {
+		action2.textContent = "PREPARE TO LOWER PREP FLAG.";
+	}	
+	else if (display.textContent == "01:00") {
+		action1.textContent = "SOUND HORN ONCE.";
+		action2.textContent = "LOWER PREP FLAG.";
+	}
+	else if (display.textContent == "00:45") {
+		action1.textContent = "";
+		action2.textContent = "";
+	}
+	
+	else if (display.textContent == "00:15") {
+		action1.textContent = "PREPARE TO LOWER FLEET FLAG.";
+	}
+	else if (display.textContent == "00:10") {
+		action2.textContent = "PREPARE TO START RACE.";
+	}
+	else if (display.textContent == "00:00") {
+		action1.textContent = "SOUND HORN ONCE.";
+		action2.textContent = "LOWER THE FLEET FLAG.";
+		action3.textContent = "RACE STARTED!!";
+	
+		clearInterval(myInterval);
+	
+    		
+	}
+	
+	
+
+        if (diff <= 0) {
+            // add one second so that the count down starts at the full duration
+            // example 05:00 not 04:59 
+	    start = Date.now() + 1000;
+	}
+        
+    };
+    // we don't want to wait a full second before the timer starts
+
+   
+           timer();
+           var myInterval = setInterval(timer, 1000);
+   
+    
+    
+}
+
+
+function restart() {
+    self.location.reload()
+
+}
+
+
+function start() {
+    document.getElementById("startbutton").style.display="none";
+    action1.textContent = "";
+    action2.textContent = "";
+    action3.textContent = "";
+    var sixMinutes = 60 * 6 + 10,
+    display = document.querySelector('#time');
+    startTimer(sixMinutes, display);
+
+};
+
+
+
+
+</script>
+<style>
+
+span {
+
+  color: white;
+  font-size: 128px;
+  font-family: "Arial", sans-serif;
+  font-weight: 200;
+}
+
+.tspan {
+
+  color: white;
+  font-size: 96px;
+  font-family: "Arial", sans-serif;
+  font-weight: 200;
+}
+
+.ispan {
+
+  color: yellow;
+  font-size: 72px;
+  font-family: "Arial", sans-serif;
+  font-weight: 200;
+}
+
+.flagspan {
+
+  color: orange;
+  font-size: 72px;
+  font-family: "Arial", sans-serif;
+  font-weight: 200;
+}
+
+.redspan {
+
+  color: red;
+  font-size: 96px;
+  font-family: "Arial", sans-serif;
+  font-weight: 200;
+}
+
+.top {
+  display: flex;
+  justify-content: center;
+  background:black;
+}
+
+.instructions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background:black;
+}
+
+.start {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background:black;
+}
+
+.mybutton {
+  background:black;
+}
+
+.restart {
+  position: absolute; 
+  bottom: 0; 
+  right: 0;
+}
+
+.main {
+display: flex;
+}
+</style>
+</head>
+<body bgcolor="black">
+	<div class="top">
+		<span class="tspan" id="time">00:00</span>
+		
+	</div>
+	<div class="start"><button id="startbutton" class="mybutton" onclick="start();"><img id="start_button" src="icons/start_seq.png"/></button></div>
+	<div class="instructions"><span class="ispan" id="action1"></span></div>
+	<div class="instructions"><span class="flagspan" id="action2"></span></div>
+	<div class="instructions"><span class="redspan" id="action3"></span></div>
+	<div class="restart"><button id="restartbutton" class="mybutton" onclick="restart();"><img id="restart_button" src="icons/restart.png"/></button></div>
+</body>
+</body>
+</html>
