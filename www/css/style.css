@@ -1,0 +1,161 @@
+/* Default Style */
+* {
+    border: none;
+
+    /* No Button Highlights */
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+body {
+    /* Default Font */
+    font-family: system-ui, -apple-system, -apple-system-font, 'Segoe UI', 'Roboto', sans-serif;
+    font-size:   12px;
+
+    /* Full Screen */
+    width:   100%;
+    height:  100vh;
+    margin:  0px;
+    padding: 0px;
+
+    /* Default Colors */
+    background-color: #2C3347;
+    color:            #FFFFFF;
+
+    /* Padding to avoid the "unsafe" areas behind notches in the screen */
+    padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+
+    -webkit-touch-callout:    none; /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
+    -webkit-user-select:      none; /* prevent copy paste, to allow, change 'none' to 'text' */
+}
+
+h1 {
+  font-size:   48px;
+  font-family: "Arial", sans-serif;
+  font-weight: 200;
+
+  text-align:  center;
+  line-height: 59px;
+  margin:      0;
+}
+
+.stopwatch {
+  text-align: center;
+  width: 100%;
+}
+
+.controls {
+  margin-left: auto;
+  margin-right: auto;
+  height: 67px;
+  width: 440px;
+}
+
+.atime {
+  font-family: "Arial", sans-serif;
+  font-weight: 300;
+  color: #0cde31;
+  font-size: 48px;
+}
+
+button {
+  cursor: pointer;
+  background: transparent;
+  padding: 0;
+  border: none;
+  margin: 0;
+  outline: none;
+}
+
+#playButton {
+  display: block;
+}
+
+#pauseButton {
+  display: none;
+}
+
+
+.button_undo {
+  cursor: pointer;
+  background: transparent;
+  padding: 0;
+  border: none;
+  margin: 0;
+  outline: none;
+}
+
+.results {
+  width: 100%;
+  padding-top: 25px;
+}
+
+
+table {
+  border: 1px solid black;
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 200px;
+}
+
+th,
+td {
+  border: 1px solid black;
+  text-align: center;
+  width: 120px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.tdundo {
+	  border: 1px solid black;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+}
+
+select {
+    /* styling */
+    background-color: #2c3347;
+    border: thin solid blue;
+    border-radius: 4px;
+    display: inline-block;
+    font-family: "Arial", sans-serif;
+    color: #ffffff;
+    line-height: 40px;
+    height: 40px;
+    padding: 0.0em 1em 0.0em 1em;
+
+    /* reset */
+
+    margin: 0;      
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.box {
+    background-color: #2c3347;
+    color: #ffffff;
+    border: thin solid white;
+    vertical-align: top;
+    height: 67px;
+}
+
+.box select option {
+  padding: 10px;
+}
+
+@keyframes fade {
+    from {opacity: 1.0;}
+    50%  {opacity: 0.4;}
+    to   {opacity: 1.0;}
+}
+
+.blink {
+    animation:         fade 3000ms infinite;
+    -webkit-animation: fade 3000ms infinite;
+}
