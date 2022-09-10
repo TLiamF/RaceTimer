@@ -5,7 +5,7 @@
         <title>VYC Race Timer</title>
 
         <!-- View -->
-        <meta name='viewport' content='width=device-width, initial-scale=1>' />
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
 
         <!-- Encoding -->
         <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
@@ -18,15 +18,18 @@
         <script src='js/index.js'></script>
         <script src='js/jquery.js'></script>
         <script src="script.js"></script>
+		<script src='js/startRace.js'></script>
         <script src='js/util.js'></script>
     </head>
     <body>
+		<div id='startRace'></div>
         <div style='max-width: 1280px'>
             <div id='AFleet' style='width: 50%; float: left; padding: 0; margin: 0;'></div>
             <div id='BFleet' style='width: 50%; float: left; padding: 0; margin: 0;'></div>
         </div>
 
 		<script>
+			// A-Fleet Boats
 			var boatsA = [
 				'Ayesha',
 				'Captivator',
@@ -40,6 +43,7 @@
 				'Varua'
 			];
 
+			// B-Fleet Boats
 			var boatsB = [
 				'Blues n Seas',
 				'Cimarron',
@@ -58,7 +62,7 @@
 			$('#AFleet').addFleet('A Fleet', 'tableA', boatsA);
 			$('#BFleet').addFleet('B Fleet', 'tableB', boatsB);
 
-
+			startRace('#startRace');
 		</script>
     </body>
 </html>
