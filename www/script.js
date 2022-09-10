@@ -1,5 +1,6 @@
-// Convert time to a format of hours, minutes, seconds, and milliseconds
-
+/*************************************************************************************************
+ * Convert to String.
+------------------------------------------------------------------------------------------------*/
 function timeToString(time) {
     let diffInHrs = time / 3600000;
     let hh = Math.floor(diffInHrs);
@@ -22,53 +23,7 @@ function timeToString(time) {
 }
 
 /*************************************************************************************************
- * Start Timer.
-------------------------------------------------------------------------------------------------*/
-function start(timer) {
-    // changed this to time only for .csv file output	
-    timer.raceStart = getCurrentTime();
-    timer.startTime = Date.now() - timer.elapsedTime;
-    timer.timerInterval = setInterval(function printTime() {
-        timer.elapsedTime = Date.now() - timer.startTime;
-        timer.display.html(timeToString(timer.elapsedTime));
-    }, 10);
-
-    // Pause Button
-    $(timer.playButton ).hide();
-    $(timer.pauseButton).show();
-}
-
-/*************************************************************************************************
- * Pause Timer.
-------------------------------------------------------------------------------------------------*/
-function pause(timer) {
-    clearInterval(timer.timerInterval);
-
-    // Play Button
-    $(timer.playButton ).show();
-    $(timer.pauseButton).hide();
-}
-
-/*************************************************************************************************
- * Reset Timer.
-------------------------------------------------------------------------------------------------*/
-function reset(timer, text) {
-    if(confirm(text)) {
-        clearInterval(timer.timerInterval);
-        timer.display.html("00:00:00:00");
-
-        // Play Button
-        $(timer.playButton ).show();
-        $(timer.pauseButton).hide();
-
-        return true;
-	  } else {
-        return false;
-    }
-}
-
-/*************************************************************************************************
- * Add Timer Object.
+ * Create Timer Object.
 ------------------------------------------------------------------------------------------------*/
 function createTimer(id, prefix) {
     // Add Buttons
@@ -90,10 +45,45 @@ function createTimer(id, prefix) {
         display:       $(`#${prefix}_display`)
     };
     
-    // Add Callbacks
-    timer.playButton .on('click', () => start(timer));
-    timer.pauseButton.on('click', () => pause(timer));
-    timer.resetButton.on('click', () => reset(timer, 'Stop and clear timer?'));
+    // Play Button
+    timer.playButton.on('click', () => {
+        // Set Start Time
+        timer.raceStart = getCurrentTime();
+        timer.startTime = Date.now() - timer.elapsedTime;
+
+        // Start Timer
+        timer.timerInterval = setInterval(function printTime() {
+            timer.elapsedTime = Date.now() - timer.startTime;
+            timer.display.html(timeToString(timer.elapsedTime));
+        }, 10);
+
+        // Pause Button
+        $(timer.playButton ).hide();
+        $(timer.pauseButton).show();
+    });
+
+    // Pause Button
+    timer.pauseButton.on('click', () => {
+        // Stop Timer
+        clearInterval(timer.timerInterval);
+
+        // Play Button
+        $(timer.playButton ).show();
+        $(timer.pauseButton).hide();
+    });
+
+    // Reset Button
+    timer.resetButton.on('click', () => {
+        if(confirm('Stop and clear timer?')) {
+            // Reset Timer
+            clearInterval(timer.timerInterval);
+            timer.display.html("00:00:00:00");
+    
+            // Play Button
+            $(timer.playButton ).show();
+            $(timer.pauseButton).hide();
+        }
+    });
 
     // Play Button
     $(timer.playButton ).show();
