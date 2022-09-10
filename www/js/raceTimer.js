@@ -25,7 +25,7 @@ function timeToString(time) {
 /*************************************************************************************************
  * Create Timer Object.
 ------------------------------------------------------------------------------------------------*/
-function createTimer(id, prefix) {
+function raceTimer(id, prefix) {
     // Add Buttons
     $(id).append(`
         <img id='${prefix}_playButton'  src="icons/play-button.png"  />

@@ -78,13 +78,13 @@ jQuery.fn.addFleet = function(name, id, boats) {
             </div>
         </div>
 
-        <div class="results">
+        <div class="results" style='padding: 20px;'>
             <table id='${id}'></table>
         </div>
     `);
 
-    // Create Timer
-    var timer = createTimer(`#${id}_timer`, id);
+    // Racing Timer
+    var timer = raceTimer(`#${id}_timer`, id);
 
     // Add Boats
     for(var index = 0; index < boats.length; index++) {
