@@ -23,9 +23,9 @@
 		<script src='js/startTimer.js'></script>
         <script src='js/fleet.js'     ></script>
     </head>
-    <body>
+    <body style='width: 1280px'>
 		<div id='startRace'></div>
-        <div style='max-width: 1280px'>
+        <div>
             <div id='AFleet' style='width: 50%; float: left; padding: 0; margin: 0;'></div>
             <div id='BFleet' style='width: 50%; float: left; padding: 0; margin: 0;'></div>
         </div>
@@ -65,6 +65,9 @@
 			$('#BFleet').addFleet('B Fleet', 'tableB', boatsB);
 
 			startTimer('#startRace');
+
+			// Zoom to Width
+			$('body').css('zoom', (100 * screen.width / 1280) + '%');
 		</script>
     </body>
 </html>
