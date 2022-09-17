@@ -49,7 +49,10 @@ jQuery.fn.addFleet = function(name, id, boats) {
             <h1>${name}</h1>
 
             <div class="circle">
-                <span class="atime" id="${id}_display">00:00:00:00</span>
+                <span class="atime" id="${id}_display">
+                    <span style='color: #0cde31;'>00:00:00</span>
+                    <span style='color: #ff0000;'>+00:00:00:00</span>
+                </span>
             </div>
             <div class="controls">
                 <span id='${id}_timer' class="buttonPlay"></span>
@@ -94,7 +97,7 @@ jQuery.fn.addFleet = function(name, id, boats) {
     // On Reset
     $(`#${id}_reload`).on('click', () => {
         // Confirmation
-        if(reset(timer, 'Start New Race?')) {
+        if(confirm('Start New Race?')) {
             // Clear Boats
             $(`#${id}`).html('');
 
@@ -102,6 +105,9 @@ jQuery.fn.addFleet = function(name, id, boats) {
             for(var index = 0; index < boats.length; index++) {
                 $(`#${id}`).addBoat(boats[index], `${id}_${index}`, timer);
             }
+
+            // Reset Timer
+            timer.reset();
         }
     });
 

@@ -23,6 +23,18 @@ function timeToString(time) {
 }
 
 /*************************************************************************************************
+ * Format Time.
+------------------------------------------------------------------------------------------------*/
+function formatTime(date) {
+    var hh = date.getHours  ().toString().padStart(2, '0');	
+    var mm = date.getMinutes().toString().padStart(2, '0');	
+    var ss = date.getSeconds().toString().padStart(2, '0');	
+    
+    // Time String
+    return `${hh}:${mm}:${ss}`;
+}
+
+/*************************************************************************************************
  * Create Timer Object.
 ------------------------------------------------------------------------------------------------*/
 function raceTimer(id, prefix) {
@@ -44,6 +56,23 @@ function raceTimer(id, prefix) {
         resetButton:   $(`#${prefix}_resetButton`),
         display:       $(`#${prefix}_display`)
     };
+
+    // Reset Timer
+    timer.reset = function() {
+        // Reset Timer
+        clearInterval(timer.timerInterval);
+        timer.display.html(`
+            <span style='color: #0cde31;'>00:00:00</span>
+            <span style='color: #ff0000;'>+00:00:00:00</span>
+        `);
+
+        // Play Button
+        $(timer.playButton ).show();
+        $(timer.pauseButton).hide();
+
+        timer.startTime   = null;
+        timer.elapsedTime = 0;
+    };
     
     // Play Button
     timer.playButton.on('click', () => {
@@ -54,7 +83,10 @@ function raceTimer(id, prefix) {
         // Start Timer
         timer.timerInterval = setInterval(function printTime() {
             timer.elapsedTime = Date.now() - timer.startTime;
-            timer.display.html(timeToString(timer.elapsedTime));
+            timer.display.html(`
+                <span style='color: #0cde31;'>${formatTime(new Date(timer.startTime))}</span>
+                <span style='color: #ff0000;'>+${timeToString(timer.elapsedTime)}</span>
+            `);
         }, 10);
 
         // Pause Button
@@ -75,13 +107,7 @@ function raceTimer(id, prefix) {
     // Reset Button
     timer.resetButton.on('click', () => {
         if(confirm('Stop and clear timer?')) {
-            // Reset Timer
-            clearInterval(timer.timerInterval);
-            timer.display.html("00:00:00:00");
-    
-            // Play Button
-            $(timer.playButton ).show();
-            $(timer.pauseButton).hide();
+            timer.reset();
         }
     });
 
@@ -104,15 +130,19 @@ function FinishBoat(prefix, timer) {
     let finish_img   = prefix + "_finish_img"; 
     let dnf          = prefix + "_dnf";
     let dnf_img      = prefix + "_dnf_img";
-    let time_display = prefix + "_time_display";
     let time_finish  = prefix + "_time_finish";
 
     document.getElementById(finish).disabled=true;
     document.getElementById(dnf).disabled=true;
     document.getElementById(finish_img).src="icons/finished.png";
     document.getElementById(dnf_img).src="icons/dnf_disabled.png";
-    document.getElementById(time_display).textContent=timeToString(timer.elapsedTime);
     document.getElementById(time_finish).textContent=getCurrentTime();
+
+    // Finish Time
+    $(`#${prefix}_time_display`).html(`
+        <div style='color: #0cde31;'>${formatTime(new Date())}</div>
+        <div style='color: #ff0000;'>+${timeToString(timer.elapsedTime)}</div>
+    `);
 
     // enable undo button
     // disable undo button
@@ -127,13 +157,18 @@ function DNFBoat(prefix) {
     let finish_img   = prefix + "_finish_img"; 
     let dnf          = prefix + "_dnf";
     let dnf_img      = prefix + "_dnf_img";
-    let time_display = prefix + "_time_display";
 
     document.getElementById(dnf).disabled=false;
     document.getElementById(finish).disabled=true;
     document.getElementById(dnf_img).src="icons/dnf.png";
     document.getElementById(finish_img).src="icons/dnf_racing.png";
-    document.getElementById(time_display).textContent = " -- DNF --";
+
+    // Finish Time
+    $(`#${prefix}_time_display`).html(`
+        <div style='color: #ff0000;'>-- DNF --</div>
+    `);
+
+
     // enable undo button
     document.getElementById(undo).disabled=false;
     document.getElementById(undo_img).src="icons/undo.png";
@@ -146,15 +181,15 @@ function undo_result(prefix, timer) {
     let finish_img   = prefix + "_finish_img"; 
     let dnf          = prefix + "_dnf";
     let dnf_img      = prefix + "_dnf_img";
-    let time_display = prefix + "_time_display";
 
     // enable finish and DNF buttons and reset time
     document.getElementById(finish).disabled=false;
     document.getElementById(dnf).disabled=false;
     document.getElementById(finish_img).src="icons/racing.png";
     document.getElementById(dnf_img).src="icons/dnf1.png";
-    document.getElementById(time_display).textContent="00:00:00:00";
 
+    // Finish Time
+    $(`#${prefix}_time_display`).html(`00:00:00:00`);
 
     // disable undo button
     document.getElementById(undo).disabled=true;
